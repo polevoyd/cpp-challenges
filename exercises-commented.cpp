@@ -359,6 +359,312 @@ std::string cut_par(std::string s)
           /* If vector with indexes not empty, then 
           * for index of parenthesis we cut a substring, 
           * then reverse it and put it back on same place */
+	
+	/*-------------------------------------------------------------*/
+
+std::vector<int> alternatingSums(std::vector<int> a) {
+
+    /* Several people are standing in a row 
+     * and need to be divided into two teams. 
+     * The first person goes into team 1, the 
+     * second goes into team 2, the third goes 
+     * into team 1 again, the fourth into team 2, 
+     * and so on. You are given an array of 
+     * positive integers - the weights of the 
+     * people. Return an array of two integers, 
+     * where the first element is the total weight 
+     * of team 1, and the second element is the 
+     * total weight of team 2 after the division 
+     * is complete. */
+    
+    std::vector<int> sums{a[0] , a[1]};
+    
+    if (a.size() % 2)
+    {
+        for (int i = 2 ; i < a.size() ; i+=2)
+            sums[0] += a[i];
+        for (int j = 3 ; j < a.size() - 1 ; j+=2)
+            sums[1] += a[j];
+    }
+    else
+    {
+        for (int i = 2 ; i < a.size() - 1 ; i+=2)
+            sums[0] += a[i]; 
+        for (int j = 3 ; j < a.size() ; j+=2)
+            sums[1] += a[j];
+    }
+
+    return sums;
+}
+
+/*-------------------------------------------------------------*/
+
+std::vector<std::string> addBorder(std::vector<std::string> picture) {
+/* Given a rectangular matrix of characters, 
+ * add a border of asterisks(*) to it.
+ * Example
+ * For
+ * picture = ["abc",
+              "ded"]
+ * the output should be
+ * addBorder(picture) = ["*****",
+                         "*abc*",
+                         "*ded*",
+                         "*****"] 
+ */
+
+ picture.insert(picture.begin(), std::string(picture[0].size(), '*'));
+ picture.push_back(std::string(picture[0].size(), '*'));
+
+ for (auto &i : picture)
+    i = "*" + i + "*";
+
+ return picture;
+
+}
+
+/*-------------------------------------------------------------*/
+
+int firstDuplicate(std::vector<int> a) {
+
+    /* Given an array a that contains only numbers in the range 
+     * from 1 to a.length, find the first duplicate number for 
+     * which the second occurrence has the minimal index. In other 
+     * words, if there are more than 1 duplicated numbers, return 
+     * the number for which the second occurrence has a smaller 
+     * index than the second occurrence of the other number does. 
+     * If there are no such elements, return -1.
+
+        Example
+
+        For a = [2, 1, 3, 5, 3, 2], the output should be
+        firstDuplicate(a) = 3.
+
+        There are 2 duplicates: numbers 2 and 3. The second occurrence 
+        of 3 has a smaller index than the second occurrence of 2 does, 
+        so the answer is 3.
+
+        For a = [2, 4, 3, 5, 1], the output should be
+        firstDuplicate(a) = -1. */
+    
+    // With set: inserting all the elements 
+    // and if meet duplicate - return it 
+
+    std::set<int> s{};
+
+	for (auto i : a)
+		if (s.find(i) != s.end())
+			return i;
+		else
+			s.insert(i);
+	return -1;
+    
+    /*
+
+     // With arrays (slower and more code)
+
+    int smallest_index{INT_MAX};
+    
+	for (std::vector<int>::iterator it = a.begin() ; it != a.end() - 1 ; it++)
+        for (std::vector<int>::iterator it_2 = it + 1 ; it_2 != a.end() ; it_2++)
+            if ((*it_2 == *it) && ((it_2 - a.begin()) < smallest_index))
+                smallest_index = it_2 - a.begin();
+
+    return (smallest_index != INT_MAX) ? a[smallest_index] : -1;
+    
+    */
+}
+    
+  
+/*-------------------------------------------------------------*/
+
+bool areSimilar(std::vector<int> a, std::vector<int> b) {
+
+    /* Two arrays are called similar if one can be obtained 
+     * from another by swapping at most one pair of elements 
+     * in one of the arrays. Given two arrays a and b, check 
+     * whether they are similar.
+     * Example
+     * For a = [1, 2, 3] and b = [1, 2, 3], the output should be
+     * areSimilar(a, b) = true.
+     * The arrays are equal, no need to swap any elements. */
+    
+    /* If vector are equal then return true. If not, then we 
+     * swap the values of the elements pointer at after finding 
+     * a mismatch one time. If after that vector not 
+     * equal - return 0; */
+    
+    if (a == b)
+        return true;
+    std::iter_swap(
+        std::mismatch(a.begin(), a.end(), b.begin(), b.end()).first,
+        std::mismatch(a.rbegin(), a.rend(), b.rbegin(), b.rend()).first
+    );
+    return a == b;
+}
+
+/*-------------------------------------------------------------*/
+
+int arrayChange(std::vector<int> inputArray) {
+
+    /* You are given an array of integers. 
+     * On each move you are allowed to increase 
+     * exactly one of its element by one. 
+     * Find the minimal number of moves required 
+     * to obtain a strictly increasing sequence 
+     * from the input. */
+    
+    /* Put elements on stack and while stack size 
+     * smaller than vector size and check for top 
+     * element be smaller than next vector element, 
+     * counting steps if we need to increase it 
+     * in between */
+    
+    std::stack<int> s{};
+    s.push(inputArray[0]);
+    int counter_of_steps{ 0 };
+
+    while (s.size() < inputArray.size())
+        if (s.top() >= inputArray[s.size()])
+        {
+            inputArray[s.size()]++;
+            counter_of_steps++;
+        }
+        else
+            s.push(inputArray[s.size()]);
+
+    return counter_of_steps;
+}
+
+/*-------------------------------------------------------------*/
+
+     bool palindromeRearranging(std::string inputString) {
+
+    /* Given a string, find out if its characters 
+     * can be rearranged to form a palindrome.
+
+     * Example
+
+     * For inputString = "aabb", the output should 
+     * be palindromeRearranging(inputString) = true.
+
+     * We can rearrange "aabb" to make "abba", which is a palindrome. */
+    
+    
+    std::unordered_map<char, int> m;
+    
+    for (char c : inputString)
+        m[c]++;
+    
+    bool single = false;
+    
+    for (auto i : m) 
+        if (i.second % 2 == 1) 
+        {
+            if (inputString.size() % 2 == 0 || single)
+                return false;
+            single = true;
+        }
+    return true;
+}
+     
+
+/*-------------------------------------------------------------*/
+
+bool areEquallyStrong(int yourLeft, int yourRight, int friendsLeft, int friendsRight) {
+
+    /* Call two arms equally strong if the heaviest weights they each are able to lift are equal.
+     * Call two people equally strong if their strongest arms are equally strong (the strongest 
+     * arm can be both the right and the left), and so are their weakest arms.
+     * Given your and your friend's arms' lifting capabilities find out if you two are equally strong.
+     * 
+     * Example
+     * 
+     * For yourLeft = 10, yourRight = 15, friendsLeft = 15 and friendsRight = 10, the output should be
+     * areEquallyStrong(yourLeft, yourRight, friendsLeft, friendsRight) = true;
+     * For yourLeft = 15, yourRight = 10, friendsLeft = 15 and friendsRight = 10, the output should be
+     * areEquallyStrong(yourLeft, yourRight, friendsLeft, friendsRight) = true;
+     * For yourLeft = 15, yourRight = 10, friendsLeft = 15 and friendsRight = 9, the output should be
+     * areEquallyStrong(yourLeft, yourRight, friendsLeft, friendsRight) = false. */
+    
+    int your_strongest = (yourLeft >=yourRight) ? yourLeft : yourRight;
+    int friend_strongest = (friendsLeft >= friendsRight) ? friendsLeft : friendsRight;
+    int your_weakest = (yourLeft >=yourRight) ? yourRight : yourLeft;
+    int friend_weakest = (friendsLeft >= friendsRight) ? friendsRight : friendsLeft;
+    
+    return (your_strongest == friend_strongest) && (your_weakest == friend_weakest);
+}
+
+/*-------------------------------------------------------------*/
+
+int arrayMaximalAdjacentDifference(std::vector<int> inputArray) {
+
+    /* Given an array of integers, find the maximal absolute difference 
+     * between any two of its adjacent elements.
+     * 
+     * Example
+     * 
+     * For inputArray = [2, 4, 1, 0], the output should be
+     * arrayMaximalAdjacentDifference(inputArray) = 3. */
+    
+    std::stack<int> s{};
+    s.push(inputArray[0]);
+
+    int max_difference{0};
+    
+    for (int i : inputArray)
+    {
+        if (abs(i - s.top()) > max_difference)
+            max_difference = abs(i - s.top());
+        s.push(i);
+    }
+    
+    return max_difference;
+}
+
+/*   
+	// another method using max()
+	int ret = 0;
+    
+    for(int i=1; i<inputArray.size(); ++i)
+        ret = max(ret,abs(inputArray[i]-inputArray[i-1]));
+    
+    return ret; 
+	
+*/
+
+/*-------------------------------------------------------------*/
+
+bool isIPv4Address(std::string inputString) {
+
+    /* An IP address is a numerical label assigned to each device (e.g., computer, printer) 
+     * participating in a computer network that uses the Internet Protocol for communication. 
+     * There are two versions of the Internet protocol, and thus two versions of addresses. 
+     * One of them is the IPv4 address.
+     * 
+     * IPv4 addresses are represented in dot-decimal notation, which consists of four decimal 
+     * numbers, each ranging from 0 to 255 inclusive, separated by dots, e.g., 172.16.254.1.
+     * 
+     * Given a string, find out if it satisfies the IPv4 address naming rules.
+     * 
+     * Example
+     * 
+     * For inputString = "172.16.254.1", the output should be
+     * isIPv4Address(inputString) = true;
+     * 
+     * For inputString = "172.316.254.1", the output should be
+     * isIPv4Address(inputString) = false.
+     * 316 is not in range [0, 255].
+     * 
+     * For inputString = ".254.255.0", the output should be
+     * isIPv4Address(inputString) = false.
+     * There is no first number. */
+    
+        regex ipv4("^((25[0-5]|2[0-4][0-9]|[1][0-9][0-9]|[0-9]{1,2})\\.){3}(25[0-5]|2[0-4][0-9]|[1][0-9][0-9]|[0-9]{1,2})$");
+    
+        return regex_match( inputString, ipv4 ) ;
+
+}
      
           if (!left_index.empty())
           {
