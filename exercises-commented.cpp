@@ -754,3 +754,90 @@ std::string hexToBase64(std::string str)
 	return rt;
 }
 
+/*-------------------------------------------------------------*/
+
+std::vector<std::vector<int>> boxBlur(std::vector<std::vector<int>> image) {
+
+    /* The pixels in the input image are represented as integers. The algorithm 
+     * distorts the input image in the following way: Every pixel x in the output 
+     * image has a value equal to the average value of the pixel values from the 
+     * 3 × 3 square that has its center at x, including x itself. All the pixels 
+     * on the border of x are then removed.
+     * 
+     * Return the blurred image as an integer, with the fractions rounded down. */
+    
+    
+    std::vector<std::vector<int>> vector_return{};
+
+    for (int i = 1 ; i < image.size() - 1 ; i++)
+    {
+        std::vector<int> vector_row{};  
+        for (int k = 1; k < image[i].size() - 1 ; k++)
+        {   
+            int sum{};
+            sum +=  image[i-1][k-1] + image[i-1][k] + image[i-1][k+1] + 
+                    image[i][k-1]   + image[i][k]   + image[i][k+1]   + 
+                    image[i+1][k-1] + image[i+1][k] + image[i+1][k+1];
+                
+            vector_row.push_back(sum / 9);
+        }
+
+        vector_return.push_back(vector_row);
+    }
+
+    return vector_return;
+}
+
+/*-------------------------------------------------------------*/
+
+int avoidObstacles(std::vector<int> inputArray) {
+
+    /* You are given an array of integers representing coordinates of obstacles 
+     * situated on a straight line. Assume that you are jumping from the point 
+     * with coordinate 0 to the right. You are allowed only to make jumps of the 
+     * same length represented by some integer. Find the minimal length of the 
+     * jump enough to avoid all the obstacles. 
+     * 
+     * Example
+     * 
+     * For inputArray = [5, 3, 6, 7, 9], the output should be 
+     * 
+     * avoidObstacles(inputArray) = 4 */
+
+
+    int step = 1;
+     
+    while(true)
+    { 
+      bool found = true;
+
+      for(int i = 0; i < inputArray.size() ; i++)
+        if(inputArray[i] % step == 0) 
+        {
+          found = false;
+          break;
+        }
+        
+      if(found == true)
+        return step;
+       
+      step++;
+    }  
+}
+
+/*-------------------------------------------------------------*/
+
+void print_PI_num()
+{
+	/* Find PI to the Nth Digit - Enter a number and have the program generate PI up to 
+	that many decimal places. Keep a limit to how far the program will go. */
+
+	std::cout << "Enter a number to show PI: ";
+
+	unsigned int nth{};
+	std::cin >> nth;
+	std::cout << std::endl;
+	double PI_to_show = 22.0 / 7.0;
+
+	std::cout << std::fixed << std::setprecision(nth) << PI_to_show;
+}
