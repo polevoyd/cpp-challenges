@@ -841,3 +841,235 @@ void print_PI_num()
 
 	std::cout << std::fixed << std::setprecision(nth) << PI_to_show;
 }
+
+/*-------------------------------------------------------------*/
+
+std::vector<std::vector<int>> minesweeper(std::vector<std::vector<bool>> matrix) {
+    
+    /* In the popular Minesweeper game you have a board with some mines and those 
+     * cells that don't contain a mine have a number in it that indicates the total 
+     * number of mines in the neighboring cells. Starting off with some arrangement 
+     * of mines we want to create a Minesweeper game setup.
+     * 
+     * Example
+     * For
+     *             matrix = [[true, false, false],
+                            [false, true, false],
+                            [false, false, false]]
+                
+     * the output should be
+     * 
+     * minesweeper(matrix) = [[1, 2, 1],
+                              [2, 1, 1],
+                              [1, 1, 1]]   */
+    
+    // creating a matrix of zeros
+    std::vector<int> v(matrix[0].size() , 0);
+    std::vector<std::vector<int>> matrix_to_return{matrix.size(), v };
+
+    // For each element in a matrix
+    for (int i = 0 ; i < matrix.size() ; i++)
+    {
+        for (int k = 0 ; k < matrix[i].size() ; k++)
+        {
+            // that is a bomb
+            if (matrix[i][k] == true)
+            {
+                // decrement a bomb so it doesn't count itself
+                matrix_to_return[i][k]--;
+                
+                // looking for elements
+                for (int j = 0; j < matrix.size() ; j++)
+                {
+                    for (int l = 0 ; l < matrix[j].size() ; l++)
+                    {
+                        //  with indexes nearby
+                        if ((abs(j-i) <= 1)&&(abs(l-k) <= 1))
+                        {   
+                            //and increment them
+                            matrix_to_return[j][l]++;
+                        }
+                    }  
+                }  
+            }
+        }
+    }
+	
+    return matrix_to_return;
+}
+
+
+/*-------------------------------------------------------------*/
+
+std::vector<int> arrayReplace(std::vector<int> &inputArray, int elemToReplace, int substitutionElem) {
+
+    /* Given an array of integers, replace all the occurrences 
+     * of elemToReplace with substitutionElem.
+     * 
+     * Example
+     * 
+     * For 
+     * inputArray = [1, 2, 1], elemToReplace = 1 and substitutionElem = 3, 
+     * 
+     * the output should be
+     * 
+     * arrayReplace(inputArray, elemToReplace, substitutionElem) = [3, 2, 3]. */
+    
+/*
+    for (int &i : inputArray)
+        if (i == elemToReplace)
+            i = substitutionElem;
+*/  
+    std::replace(inputArray.begin(), inputArray.end(), elemToReplace, substitutionElem);
+    
+    return inputArray;
+}
+
+/*-------------------------------------------------------------*/
+
+bool evenDigitsOnly(int n) {
+
+    /* Check if all digits of the given integer are even.
+
+    Example
+
+    For n = 248622, the output should be
+    evenDigitsOnly(n) = true;
+    For n = 642386, the output should be
+    evenDigitsOnly(n) = false. */
+    
+    std::string s{ std::to_string(n) };
+    
+    for (char i : s)
+        if ((i-'0')%2)
+            return false;
+    
+    return true;
+
+}
+
+// return !~to_string(n).find_first_of("13579");
+
+/*-------------------------------------------------------------*/
+
+bool variableName(std::string name) {
+
+    /* Correct variable names consist only of English letters, 
+     * digits and underscores and they can't start with a digit.
+
+    Check if the given string is a correct variable name.
+
+    Example
+
+    For name = &quot;var_1__Int&quot;, the output should be
+    variableName(name) = true;
+    For name = &quot;qq-q&quot;, the output should be
+    variableName(name) = false;
+    For name = &quot;2w2&quot;, the output should be
+    variableName(name) = false. */
+    
+    for (char i : name)
+    { 
+        if ((name[0] > 47 && name[0] < 58) || (i < 48) || (i < 65 && i > 57) || 
+            ((i < 97 && i > 90)&&(i != 95)) || (i < 127 && i > 122))
+            return false;
+    }
+
+    return true;
+}
+
+/*-------------------------------------------------------------*/
+
+std::string alphabeticShift(std::string &inputString) {
+
+    /* Given a string, replace each its character by the next 
+     * one in the English alphabet (z would be replaced by a).
+
+    Example
+
+    For inputString = "crazy", the output should be
+    alphabeticShift(inputString) = "dsbaz". */
+    
+    std::string alphabet{"abcdefghijklmnopqrstuvwxyz"};
+    
+    for (char &i : inputString)
+    {
+        char temp{};
+        
+        for (int j = 0; j < alphabet.size() - 1 ; j++)
+        {
+            if ((i == alphabet[j])&&(i != 'z'))
+                temp = alphabet[j + 1];
+            
+            if (i == 'z')
+                temp = 'a';
+        }
+        
+        i = temp;
+    }
+
+    return inputString;
+}
+/*
+    for (int i = 0; i < inputString.size(); ++i) 
+	{
+        inputString[i] = (inputString[i] + 1 - 'a') % 26 + 'a';
+    }
+*/
+/*-------------------------------------------------------------*/
+
+bool chessBoardCellColor(std::string cell1, std::string cell2) {
+
+    /* Given two cells on the standard chess board, determine 
+     * whether they have the same color or not.
+
+    Example
+
+    For cell1 = "A1" and cell2 = "C3", the output should be
+    chessBoardCellColor(cell1, cell2) = true.
+
+    For cell1 = "A1" and cell2 = "H3", the output should be
+    chessBoardCellColor(cell1, cell2) = false. */
+    
+    std::string board{"aABCDEFGH"};
+
+    bool first{ false }, second{ false };
+    
+    for (int i = 1 ; i < board.size() ; ++i)
+    {
+        if (board[i] == cell1[0])
+            if ((i + (cell1[1] - '0')) % 2 == 0)
+                first = true;
+        
+        if (board[i] == cell2[0])
+            if ((i + (cell2[1] - '0')) % 2 == 0)
+                second = true;
+    }
+    
+    return (first == second) ? true : false;
+}
+/*
+return (a[0] + a[1]) % 2 == (b[0] + b[1]) % 2;
+*/
+
+/*-------------------------------------------------------------*/
+
+int circleOfNumbers(int n, int firstNumber) {
+
+    /* Consider integer numbers from 0 to n - 1 written down along 
+     * the circle in such a way that the distance between any two 
+     * neighbouring numbers is equal (note that 0 and n - 1 are 
+     * neighbouring, too).
+
+    Given n and firstNumber, find the number which is written in the 
+    radially opposite position to firstNumber.
+
+    Example
+
+    For n = 10 and firstNumber = 2, the output should be
+    circleOfNumbers(n, firstNumber) = 7. */
+    
+    return (firstNumber + n/2) % n;
+}
+
+/*-------------------------------------------------------------*/
