@@ -1073,3 +1073,196 @@ int circleOfNumbers(int n, int firstNumber) {
 }
 
 /*-------------------------------------------------------------*/
+
+int depositProfit(int deposit, int rate, int threshold) {
+
+    /* You have deposited a specific amount of dollars into your bank account. 
+     * Each year your balance increases at the same growth rate. Find out how 
+     * long it would take for your balance to pass a specific threshold with the 
+     * assumption that you don't make any additional deposits.
+
+    Example
+
+    For deposit = 100, rate = 20 and threshold = 170, the output should be
+    depositProfit(deposit, rate, threshold) = 3.
+
+    Each year the amount of money on your account increases by 20%. It means that 
+    throughout the years your balance would be:
+
+    year 0: 100;
+    year 1: 120;
+    year 2: 144;
+    year 3: 172,8.
+    Thus, it will take 3 years for your balance to pass the threshold, which is 
+    the answer. */
+    
+    double balance{ deposit }, years{};
+    
+    while ( balance < threshold )
+    {
+        balance += balance * rate / 100;
+        years++;
+    }
+    
+    return years;
+}
+
+/*-------------------------------------------------------------*/
+
+int absoluteValuesSumMinimization(std::vector<int> a) {
+
+    /* Given a sorted array of integers a, find an integer x from a 
+     * such that the value of
+
+    abs(a[0] - x) + abs(a[1] - x) + ... + abs(a[a.length - 1] - x)
+    is the smallest possible (here abs denotes the absolute value).
+    If there are several possible answers, output the smallest one.
+
+    Example
+
+    For a = [2, 4, 7], the output should be
+    absoluteValuesSumMinimization(a) = 4. 
+    
+    */
+    
+    int minSum{ INT_MAX }, index{ 0 };
+    
+    for (std::vector<int>::iterator i = a.begin() ; i != a.end() ; i++)
+    {
+        int temp{ 0 };
+        
+        for (auto k : a)
+            temp += abs(k - *i);
+        
+        if (temp < minSum)
+        {
+            minSum = temp;
+            index = i - a.begin();
+        }
+    }
+
+    return a[index];
+    
+}
+// return a[(a.size() - 1) / 2];
+
+/*-------------------------------------------------------------*/
+
+/* Given an array of equal-length strings, check if it is possible to 
+     * rearrange the strings in such a way that after the rearrangement the 
+     * strings at consecutive positions would differ by exactly one character.
+
+    Example
+
+    For inputArray = ["aba", "bbb", "bab"], the output should be
+    stringsRearrangement(inputArray) = false;
+
+    All rearrangements don't satisfy the description condition.
+
+    For inputArray = ["ab", "bb", "aa"], the output should be
+    stringsRearrangement(inputArray) = true.
+
+    Strings can be rearranged in the following way: "aa", "ab", "bb". */
+        
+    
+    //Transforms the range [first, last) into the next permutation from 
+    //the set of all permutations that are lexicographically ordered with 
+    //respect to operator< or comp. Returns true if such permutation exists, 
+    //otherwise transforms the range into the first permutation 
+    //(as if by std::sort(first, last)) and returns false.
+    
+    while(std::next_permutation(inputArray.begin(), inputArray.end())) 
+    {
+        bool flag{ 1 };
+        
+        for(int i = 0; i < inputArray.size() - 1; i++) 
+        {
+            int c{ 0 };
+            
+            for(int j = 0; j < inputArray[i].size(); j++)
+                if(inputArray[i][j] != inputArray[i+1][j])
+                    c++;
+            if(c != 1) 
+                flag = 0; 
+        }
+        if(flag) 
+            return true;
+    }
+    
+    return false;
+}
+
+/*-------------------------------------------------------------*/
+
+std::vector<int> extractEachKth(std::vector<int> inputArray, int k) {
+    
+/* Given array of integers, remove each kth element from it.
+
+Example
+
+For inputArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] and k = 3, the output should be
+extractEachKth(inputArray, k) = [1, 2, 4, 5, 7, 8, 10]. */
+    
+    std::vector<int> rtrn{};
+    
+    for (int i = 0 ; i < inputArray.size() ; i++)
+        if ((i+1) % k != 0)
+            rtrn.push_back(inputArray[i]);
+
+    return rtrn;
+}
+
+/*-------------------------------------------------------------*/
+
+char firstDigit(std::string inputString) {
+
+    /* Find the leftmost digit that occurs in a given string.
+
+    Example
+
+    For inputString = "var_1__Int", the output should be
+    firstDigit(inputString) = '1';
+    For inputString = "q2q-q", the output should be
+    firstDigit(inputString) = '2';
+    For inputString = "0ss", the output should be
+    firstDigit(inputString) = '0'. */
+    
+    std::vector<char> digits{'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
+        
+    for (auto i : inputString)
+        for (auto k : digits)
+            if (i == k)
+                return i;
+    //for(char i : inputString) if(isdigit(i)) return i;
+	
+	//return inputString[inputString.find_first_of("0123456789")];
+}
+
+
+/*-------------------------------------------------------------*/
+
+int differentSymbolsNaive(std::string s) {
+
+    /*Given a string, find the number of different characters in it.
+
+    Example
+
+    For s = &quot;cabca&quot;, the output should be
+    differentSymbolsNaive(s) = 3.
+
+    There are 3 different characters a, b and c.*/
+    
+    std::list<char> l{};
+    
+    for (auto i : s)
+        l.push_back(i); 
+
+    l.sort();
+    l.unique(); 
+
+    return l.size();
+    
+    //return std::set<char>(s.begin(), s.end()).size();
+}
+
+/*-------------------------------------------------------------*/
