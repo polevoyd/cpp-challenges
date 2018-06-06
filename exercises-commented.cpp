@@ -1266,3 +1266,156 @@ int differentSymbolsNaive(std::string s) {
 }
 
 /*-------------------------------------------------------------*/
+int arrayMaxConsecutiveSum(std::vector<int> inputArray, int k) {
+
+    /* Given array of integers, find the maximal possible sum of 
+     * some of its k consecutive elements.
+
+    Example
+
+    For inputArray = [2, 3, 5, 1, 6] and k = 2, the output should be
+    arrayMaxConsecutiveSum(inputArray, k) = 8.
+    All possible sums of 2 consecutive elements are:
+
+    2 + 3 = 5;
+    3 + 5 = 8;
+    5 + 1 = 6;
+    1 + 6 = 7.
+    Thus, the answer is 8. */
+    
+    /*
+    int max_sum{ 0 };
+
+	for (int i = 0; i <= inputArray.size() - k ; i++)
+	{
+		int temp_sum{ std::accumulate(inputArray.begin() + i, inputArray.begin() + i + k, 0) };
+        std::cout << temp_sum << " ";
+		if (temp_sum > max_sum)
+		    max_sum = temp_sum;
+	}
+
+	return max_sum;
+    */
+    /*
+    std::set<int> s{};
+    for( int i = 0 ; i <= inputArray.size() - k ; i++)
+        s.insert( std::accumulate(inputArray.begin() + i, inputArray.begin() + i + k, 0) );
+
+    return *s.rbegin();
+    */
+
+    int mx = 0;
+    
+    for (int i = 0 ; i < k ; i++) 
+        mx += inputArray[i];
+    
+    int s = mx;
+    
+    for (int i = k ; i < inputArray.size() ; i++) 
+    {
+        s -= inputArray[i-k];
+        s += inputArray[i];
+        mx = std::max(mx, s);
+    }
+    
+    return mx;
+}
+
+/*-------------------------------------------------------------*/
+
+int growingPlant(int upSpeed, int downSpeed, int desiredHeight) {
+    /*
+    Each day a plant is growing by upSpeed meters. Each night that 
+    plant's height decreases by downSpeed meters due to the lack of sun 
+    heat. Initially, plant is 0 meters tall. We plant the seed at the 
+    beginning of a day. We want to know when the height of the plant will 
+    reach a certain level.
+
+    Example
+
+    For upSpeed = 100, downSpeed = 10 and desiredHeight = 910, the output should be
+    growingPlant(upSpeed, downSpeed, desiredHeight) = 10.
+    */
+    
+    int current_height{ 0 }, days{ 0 };
+    
+    while (current_height < desiredHeight)
+    {
+        current_height += upSpeed;
+        if (current_height >= desiredHeight)
+            return days + 1;
+        current_height -= downSpeed;
+        days++;
+    }
+     return days - 1;
+}
+
+/*-------------------------------------------------------------*/
+
+int knapsackLight(int value1, int weight1, int value2, int weight2, int maxW) {
+
+    /* You found two items in a treasure chest! The first item weighs weight1 and is 
+     * worth value1, and the second item weighs weight2 and is worth value2. What is the 
+     * total maximum value of the items you can take with you, assuming that your max 
+     * weight capacity is maxW and you can't come back for the items later?
+
+    Note that there are only two items and you can't bring more than one item of each type, 
+    i.e. you can't take two first items or two second items.
+
+    Example
+
+    For value1 = 10, weight1 = 5, value2 = 6, weight2 = 4 and maxW = 8, the output should be
+    knapsackLight(value1, weight1, value2, weight2, maxW) = 10.
+
+    You can only carry the first item.
+
+    For value1 = 10, weight1 = 5, value2 = 6, weight2 = 4 and maxW = 9, the output should be
+    knapsackLight(value1, weight1, value2, weight2, maxW) = 16.
+
+    You're strong enough to take both of the items with you.
+
+    For value1 = 5, weight1 = 3, value2 = 7, weight2 = 4 and maxW = 6, the output should be
+    knapsackLight(value1, weight1, value2, weight2, maxW) = 7.
+
+    You can't take both items, but you can take any of them. */
+           
+    if ((maxW == weight1) && (value1 * maxW / weight1 > value2 * maxW / weight2))
+        return value1;
+    if ((maxW == weight2) && (value1 * maxW / weight1 < value2 * maxW / weight2))
+        return value2;
+    if (maxW >= weight1 + weight2)
+            return value1 + value2;
+    if (maxW < std::min(weight1, weight2))
+        return 0;
+    else
+        return std::max(value1, value2); 
+}
+
+/*-------------------------------------------------------------*/
+
+std::string longestDigitsPrefix(std::string inputString) {
+
+    /* Given a string, output its longest prefix which contains only digits.
+
+    Example
+
+    For inputString="123aa1", the output should be
+    longestDigitsPrefix(inputString) = "123". */
+    
+    std::string r{};
+ 
+    if (std::isdigit(inputString[0]))
+    {
+        int counter{0};
+        do
+        {
+            r.push_back(inputString[counter]);
+            counter++;
+        } while (std::isdigit(inputString[counter]));
+    }
+    return r;
+    //return inputString.substr(0, inputString.find_first_not_of("0123456789"));
+}
+
+/*-------------------------------------------------------------*/
+
