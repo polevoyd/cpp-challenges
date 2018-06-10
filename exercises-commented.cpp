@@ -1529,3 +1529,220 @@ bool bishopAndPawn(std::string bishop, std::string pawn) {
 }
 
 /*-------------------------------------------------------------*/
+/*
+Definition for a binary tree node.
+struct TreeNode {
+int val;
+TreeNode *left;
+TreeNode *right;  
+TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+*/
+ /* 	preorder traversal 	*/ 
+ /* 	root - left - right	*/
+ /* 
+ since we doing recursion, we can't create vector inside of recursion
+and have to split function to two functions: one accepting a root and vector
+and doing traversal and another one takes root, creates empty vector and
+applying first function to it 
+*/
+class Solution {
+public:
+    std::vector<int> preorderTraversal(TreeNode* root) 
+    {
+		std::vector<int> rt{};
+        calculateAndReturn(root, rt);
+        return rt;
+    }
+    
+    void calculateAndReturn(TreeNode *root, std::vector<int> &v)
+    {
+        if ( root != NULL )                     // if node is not empty, cause otherwise nothing to add
+        { 
+            v.push_back(root->val);             // adding value to a vector
+            calculateAndReturn( root->left, v);  // going to left child and repeat previous steps 
+            calculateAndReturn( root->right, v); // going to right child and repeat previous steps 
+        }
+    }
+};
+/* 
+BUT we can also do that just using a static variable 
+and add values directly to it 
+*/
+static std::vector<int> v{};
+class Solution {
+public:
+    std::vector<int> preorderTraversal(TreeNode* root) 
+    {
+        if ( root != NULL )                  // if node is not empty, cause otherwise nothing to add
+        { 
+            v.push_back(root->val);          // adding current |root| value to a vector
+            preorderTraversal( root->left);  // going to |left| child and repeat previous steps 
+            preorderTraversal( root->right); // going to |right| child and repeat previous steps 
+        }
+        return v;
+    }
+};
+/* same thing but without recursion (iteratively) */
+class Solution {
+public:
+    std::vector<int> v{};
+    std::vector<int> preorderTraversal(TreeNode* root) 
+    {
+        std::vector<int> v{};
+        std::stack<TreeNode*> s{};
+        if (root == NULL)   // if input empty
+            return v;       // then return vector
+        else
+        {
+            s.push(root);       // adding this root to stack
+            while(!s.empty())   // while stack is not empty
+            {
+                TreeNode *tmp = s.top();     //temp node that will be a link to top one
+                v.push_back(tmp->val);       // push the root's value into a vector
+                s.pop();                     //pop the temp node from stack
+                                            // since stack is FILO
+                if(tmp->right != NULL)      // if right node not empty
+                    s.push(tmp->right); // then push it to stack
+                if(tmp->left != NULL)       // if left node not empty
+                    s.push(tmp->left);  // then push it to stack too
+            }
+        return v;
+        }
+    }
+};
+
+/*-------------------------------------------------------------*/
+/* Binary Tree Inorder Traversal */
+/*
+Definition for a binary tree node.
+struct TreeNode {
+int val;
+TreeNode *left;   
+TreeNode *right;  
+TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+*/
+class Solution {
+public:
+    void calculateIntoVector(TreeNode* root, std::vector<int> &v)
+    {
+        if (root != NULL)
+        {
+            calculateIntoVector(root->left, v);
+            v.push_back(root->val);
+            calculateIntoVector(root->right, v);
+        }
+    }
+    std::vector<int> inorderTraversal(TreeNode* root) {
+        std::vector<int> r{};
+        calculateIntoVector(root, r);
+        return r;
+    }
+};
+
+/*---------------inorder iteratively------------------*/
+
+    std::vector<int> inorderTraversal(TreeNode* root) {
+        
+        std::vector<int> r{};
+        // if root is null then just return empty vector
+        if (root == NULL) return r;
+        //if not, we are creating an empty stack
+        std::stack<TreeNode*> st{};
+        TreeNode* current = root;
+        // while current not empty or stack not empty
+        while (current || !st.empty()) 
+        {
+            //specifically, while current not empty
+            //we pushing it to stack and moving to left
+            while (current) 
+            {
+                st.push(current);
+                current = current->left;
+            }
+            //okay, now current is NULL
+            // so we making current pack to
+            //previous one (top of stack)
+            current = st.top();
+            //and pop it from stack
+            st.pop();
+            //adding current value to vector
+            r.push_back(current->val);
+            //and moving to right
+            current = current->right;
+        }
+        return r;
+    }
+/*-------------------------------------------------------------*/
+
+/*
+Binary Tree Postorder Traversal
+
+Definition for a binary tree node.
+struct TreeNode {
+	int val;
+	TreeNode *left;
+	TreeNode *right;
+	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+ 
+-------------Recursive way-------------
+*/
+class Solution {
+public:
+    void traversePost(TreeNode* root, std::vector<int> &v)
+    {
+        if (root != NULL)
+        {
+            /*root - right - left*/
+            traversePost(root->left, v);
+            traversePost(root->right, v);
+            v.push_back(root->val);
+        }
+    }
+    
+    std::vector<int> postorderTraversal(TreeNode* root) 
+    {        
+        std::vector<int> v{};
+        traversePost(root, v);
+        return v;
+    }
+};
+
+/*-----------iterative way-----------*/
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) 
+    {
+        vector<int> r;
+        stack<TreeNode*> s;
+        TreeNode* _current_node = root;
+        TreeNode* _last_node = NULL;
+        
+        while(_current_node || !s.empty())
+        {
+            if(_current_node)
+            {
+                s.push(_current_node);
+                _current_node = _current_node->left;
+            }
+            else
+            {
+                TreeNode* _top_node = s.top();
+                if(_top_node->right && _top_node->right != _last_node)
+                {
+                    _current_node = _top_node->right;
+                }
+                else
+                {
+                    r.push_back(_top_node->val);
+                    _last_node = _top_node;
+                    s.pop();
+                }
+            }
+        }
+    return r;
+    }
+};
+/*-------------------------------------------------------------*/
