@@ -1,5 +1,4 @@
 int adjacentElementsProduct(std::vector<int> inputArray) {
-
     /* Given an array of integers, find the pair 
      * of adjacent elements that has the largest 
      * product and return that product. */
@@ -12,11 +11,7 @@ int adjacentElementsProduct(std::vector<int> inputArray) {
     
     return max_product;
 }
-
-
 /*-------------------------------------------------------------*/
-
- 
 int shapeArea(int n) {
 
     /* Your task is to find the area of a polygon 
@@ -30,12 +25,7 @@ int shapeArea(int n) {
     return n*n + (n-1)*(n-1);
 
 }
-
-
 /*-------------------------------------------------------------*/
-
- 
-
 int makeArrayConsecutive2(std::vector<int> statues) {
 
     
@@ -48,28 +38,19 @@ int makeArrayConsecutive2(std::vector<int> statues) {
      * statues to be able to accomplish that. Help him figure 
      * out the minimum number of additional statues needed.*/
     
-
     /* Find max number and min numbers, then return difference between count that should be between them and actual amount of numbers */
     
     int max{0}, min{20};
-
     for (auto i : statues)
     {
         if (i > max)
             max = i;
         if (i < min)
             min = i;
-    }
-    
+    } 
    return (max - min - 1) - (statues.size() - 2);
-
 }
-
-
 /*-------------------------------------------------------------*/
-
- 
-
 bool almostIncreasingSequence(std::vector<int> sequence) {
 
     /* Given a sequence of integers as an array, 
@@ -102,11 +83,7 @@ bool almostIncreasingSequence(std::vector<int> sequence) {
     
     return removes_needed < 2;  
 }
-
-
 /*-------------------------------------------------------------*/
-
- 
 int matrixElementsSum(std::vector<std::vector<int>> matrix) {
 
     /* After they became famous, the CodeBots all decided 
@@ -147,13 +124,8 @@ int matrixElementsSum(std::vector<std::vector<int>> matrix) {
      }
      
      return sum;
-
 }
-
-
 /*-------------------------------------------------------------*/
-
- 
 void quickSort(std::vector<int> &input_array, int left, int right) 
 {
 	/* setting up indexes at the beginning and end, a pivot 	point in a 	middle*/
@@ -186,11 +158,7 @@ void quickSort(std::vector<int> &input_array, int left, int right)
 	if (i < right)
 		quickSort(input_array, i, right);
 }
-
-
 /*-------------------------------------------------------------*/
-
- 
 std::vector<std::string> allLongestStrings(std::vector<std::string> inputArray) {
 
     /* Given an array of strings, return another 
@@ -209,11 +177,7 @@ std::vector<std::string> allLongestStrings(std::vector<std::string> inputArray) 
     
     return longest_strings;
 }
-
-
 /*-------------------------------------------------------------*/
-
- 
 int commonCharacterCount(std::string s1, std::string s2) {
 
     /* Given two strings, find the number of common 
@@ -230,11 +194,7 @@ int commonCharacterCount(std::string s1, std::string s2) {
   
   return intersection.size();
 }
-
-
 /*-------------------------------------------------------------*/
-
- 
 bool isLucky(int n) {
 
     /* Ticket numbers usually consist of an 
@@ -255,11 +215,7 @@ bool isLucky(int n) {
     
     return (sum1 == sum2) ? true : false;
 }
-
-
 /*-------------------------------------------------------------*/
-
- 
 std::vector<int> sortByHeight(std::vector<int> a) {
 
     /* Some people are standing in a row in a park. 
@@ -281,14 +237,9 @@ std::vector<int> sortByHeight(std::vector<int> a) {
                 a[i] = a[j];
                 a[j] = temp;
               }
-
     return a;
 }
-
-
 /*-------------------------------------------------------------*/
-
- 
 std::string reverseParentheses(std::string str) {
 
     /* You have a string s that consists of English 
@@ -359,9 +310,7 @@ std::string cut_par(std::string s)
           /* If vector with indexes not empty, then 
           * for index of parenthesis we cut a substring, 
           * then reverse it and put it back on same place */
-	
-	/*-------------------------------------------------------------*/
-
+/*-------------------------------------------------------------*/
 std::vector<int> alternatingSums(std::vector<int> a) {
 
     /* Several people are standing in a row 
@@ -396,7 +345,6 @@ std::vector<int> alternatingSums(std::vector<int> a) {
 
     return sums;
 }
-
 /*-------------------------------------------------------------*/
 
 std::vector<std::string> addBorder(std::vector<std::string> picture) {
@@ -422,7 +370,6 @@ std::vector<std::string> addBorder(std::vector<std::string> picture) {
  return picture;
 
 }
-
 /*-------------------------------------------------------------*/
 
 int firstDuplicate(std::vector<int> a) {
@@ -474,8 +421,6 @@ int firstDuplicate(std::vector<int> a) {
     
     */
 }
-    
-  
 /*-------------------------------------------------------------*/
 
 bool areSimilar(std::vector<int> a, std::vector<int> b) {
@@ -502,7 +447,6 @@ bool areSimilar(std::vector<int> a, std::vector<int> b) {
     );
     return a == b;
 }
-
 /*-------------------------------------------------------------*/
 
 int arrayChange(std::vector<int> inputArray) {
@@ -535,7 +479,6 @@ int arrayChange(std::vector<int> inputArray) {
 
     return counter_of_steps;
 }
-
 /*-------------------------------------------------------------*/
 
      bool palindromeRearranging(std::string inputString) {
@@ -567,8 +510,6 @@ int arrayChange(std::vector<int> inputArray) {
         }
     return true;
 }
-     
-
 /*-------------------------------------------------------------*/
 
 bool areEquallyStrong(int yourLeft, int yourRight, int friendsLeft, int friendsRight) {
@@ -594,7 +535,6 @@ bool areEquallyStrong(int yourLeft, int yourRight, int friendsLeft, int friendsR
     
     return (your_strongest == friend_strongest) && (your_weakest == friend_weakest);
 }
-
 /*-------------------------------------------------------------*/
 
 int arrayMaximalAdjacentDifference(std::vector<int> inputArray) {
@@ -632,7 +572,6 @@ int arrayMaximalAdjacentDifference(std::vector<int> inputArray) {
     return ret; 
 	
 */
-
 /*-------------------------------------------------------------*/
 
 bool isIPv4Address(std::string inputString) {
@@ -679,11 +618,7 @@ bool isIPv4Address(std::string inputString) {
           
           return s;
 }
-
-
 /*-------------------------------------------------------------*/
-
- /*-------------------------------------------------------------*/
 
 std::string hexToBase64(std::string str)
 {
@@ -753,7 +688,6 @@ std::string hexToBase64(std::string str)
 
 	return rt;
 }
-
 /*-------------------------------------------------------------*/
 
 std::vector<std::vector<int>> boxBlur(std::vector<std::vector<int>> image) {
@@ -787,7 +721,6 @@ std::vector<std::vector<int>> boxBlur(std::vector<std::vector<int>> image) {
 
     return vector_return;
 }
-
 /*-------------------------------------------------------------*/
 
 int avoidObstacles(std::vector<int> inputArray) {
@@ -824,7 +757,6 @@ int avoidObstacles(std::vector<int> inputArray) {
       step++;
     }  
 }
-
 /*-------------------------------------------------------------*/
 
 void print_PI_num()
@@ -841,7 +773,6 @@ void print_PI_num()
 
 	std::cout << std::fixed << std::setprecision(nth) << PI_to_show;
 }
-
 /*-------------------------------------------------------------*/
 
 std::vector<std::vector<int>> minesweeper(std::vector<std::vector<bool>> matrix) {
@@ -897,8 +828,6 @@ std::vector<std::vector<int>> minesweeper(std::vector<std::vector<bool>> matrix)
 	
     return matrix_to_return;
 }
-
-
 /*-------------------------------------------------------------*/
 
 std::vector<int> arrayReplace(std::vector<int> &inputArray, int elemToReplace, int substitutionElem) {
@@ -924,7 +853,6 @@ std::vector<int> arrayReplace(std::vector<int> &inputArray, int elemToReplace, i
     
     return inputArray;
 }
-
 /*-------------------------------------------------------------*/
 
 bool evenDigitsOnly(int n) {
@@ -949,7 +877,6 @@ bool evenDigitsOnly(int n) {
 }
 
 // return !~to_string(n).find_first_of("13579");
-
 /*-------------------------------------------------------------*/
 
 bool variableName(std::string name) {
@@ -977,7 +904,6 @@ bool variableName(std::string name) {
 
     return true;
 }
-
 /*-------------------------------------------------------------*/
 
 std::string alphabeticShift(std::string &inputString) {
@@ -1051,7 +977,6 @@ bool chessBoardCellColor(std::string cell1, std::string cell2) {
 /*
 return (a[0] + a[1]) % 2 == (b[0] + b[1]) % 2;
 */
-
 /*-------------------------------------------------------------*/
 
 int circleOfNumbers(int n, int firstNumber) {
@@ -1071,7 +996,6 @@ int circleOfNumbers(int n, int firstNumber) {
     
     return (firstNumber + n/2) % n;
 }
-
 /*-------------------------------------------------------------*/
 
 int depositProfit(int deposit, int rate, int threshold) {
@@ -1106,7 +1030,6 @@ int depositProfit(int deposit, int rate, int threshold) {
     
     return years;
 }
-
 /*-------------------------------------------------------------*/
 
 int absoluteValuesSumMinimization(std::vector<int> a) {
@@ -1145,7 +1068,6 @@ int absoluteValuesSumMinimization(std::vector<int> a) {
     
 }
 // return a[(a.size() - 1) / 2];
-
 /*-------------------------------------------------------------*/
 
 /* Given an array of equal-length strings, check if it is possible to 
@@ -1191,7 +1113,6 @@ int absoluteValuesSumMinimization(std::vector<int> a) {
     
     return false;
 }
-
 /*-------------------------------------------------------------*/
 
 std::vector<int> extractEachKth(std::vector<int> inputArray, int k) {
@@ -1211,7 +1132,6 @@ extractEachKth(inputArray, k) = [1, 2, 4, 5, 7, 8, 10]. */
 
     return rtrn;
 }
-
 /*-------------------------------------------------------------*/
 
 char firstDigit(std::string inputString) {
@@ -1237,8 +1157,6 @@ char firstDigit(std::string inputString) {
 	
 	//return inputString[inputString.find_first_of("0123456789")];
 }
-
-
 /*-------------------------------------------------------------*/
 
 int differentSymbolsNaive(std::string s) {
@@ -1264,7 +1182,6 @@ int differentSymbolsNaive(std::string s) {
     
     //return std::set<char>(s.begin(), s.end()).size();
 }
-
 /*-------------------------------------------------------------*/
 int arrayMaxConsecutiveSum(std::vector<int> inputArray, int k) {
 
@@ -1320,7 +1237,6 @@ int arrayMaxConsecutiveSum(std::vector<int> inputArray, int k) {
     
     return mx;
 }
-
 /*-------------------------------------------------------------*/
 
 int growingPlant(int upSpeed, int downSpeed, int desiredHeight) {
@@ -1349,7 +1265,6 @@ int growingPlant(int upSpeed, int downSpeed, int desiredHeight) {
     }
      return days - 1;
 }
-
 /*-------------------------------------------------------------*/
 
 int knapsackLight(int value1, int weight1, int value2, int weight2, int maxW) {
@@ -1390,7 +1305,6 @@ int knapsackLight(int value1, int weight1, int value2, int weight2, int maxW) {
     else
         return std::max(value1, value2); 
 }
-
 /*-------------------------------------------------------------*/
 
 std::string longestDigitsPrefix(std::string inputString) {
@@ -1416,7 +1330,6 @@ std::string longestDigitsPrefix(std::string inputString) {
     return r;
     //return inputString.substr(0, inputString.find_first_not_of("0123456789"));
 }
-
 /*-------------------------------------------------------------*/
 
 int binarySearch(std::vector<int> v, int e)
@@ -1443,7 +1356,6 @@ int binarySearch(std::vector<int> v, int e)
 	}
 	return pivot;
 }
-
 /*-------------------------------------------------------------*/
 
 int digitDegree(int n) {
@@ -1527,7 +1439,6 @@ bool bishopAndPawn(std::string bishop, std::string pawn) {
         // or just 
         // return abs(p[0]-b[0]) == abs(p[1]-b[1]);
 }
-
 /*-------------------------------------------------------------*/
 /*
 Definition for a binary tree node.
@@ -2030,3 +1941,49 @@ lineEncoding(s) = "2a3bc".
 }
 
 /*-------------------------------------------------------------*/
+int chessKnight(std::string cell) {
+/*
+Given a position of a knight on the standard chessboard, find the number 
+of different moves the knight can perform.
+
+The knight can move to a square that is two squares horizontally and one 
+square vertically, or two squares vertically and one square horizontally 
+away from it. The complete move therefore looks like the letter L. Check 
+out the image below to see all valid moves for a knight piece that is placed 
+on one of the central squares.
+
+Example
+
+For cell = "a1", the output should be
+chessKnight(cell) = 2.
+
+For cell = "c2", the output should be
+chessKnight(cell) = 6.
+*/
+    // by default we have an 8 options
+    int counter{8};
+
+    // creating a map with key-value as x-y position of possible dots
+    std::multimap<char, int> m{};
+    
+    // left part
+    m.insert(std::make_pair(cell[0] - 2, (cell[1] - '0') + 1));
+    m.insert(std::make_pair(cell[0] - 2, (cell[1] - '0') - 1));
+    m.insert(std::make_pair(cell[0] - 1, (cell[1] - '0') + 2));
+    m.insert(std::make_pair(cell[0] - 1, (cell[1] - '0') - 2));
+    
+    // right part
+    m.insert(std::make_pair(cell[0] + 1, (cell[1] - '0') + 2));
+    m.insert(std::make_pair(cell[0] + 1, (cell[1] - '0') - 2));
+    m.insert(std::make_pair(cell[0] + 2, (cell[1] - '0') + 1));
+    m.insert(std::make_pair(cell[0] + 2, (cell[1] - '0') - 1));    
+    
+    //going through and decrement counter for invalid positions
+    for (auto i = m.begin() ; i != m.end() ; i++)
+        if (((*i).first > 104) || ((*i).first < 97) || ((*i).second > 8) || ((*i).second < 1))
+            counter--;
+    
+    return counter;
+}
+/*-------------------------------------------------------------*/
+
