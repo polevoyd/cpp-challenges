@@ -1,17 +1,8 @@
-
-std::vector<string> split_string(string);
-
-// Complete the lagDuration function below.
 int lagDuration(int h1, int m1, int h2, int m2, int k) {
     // Return an integer denoting the duration of time in minutes by which the clock has been lagging.
     
-    
-    
+    return std::abs((h2 - (h1 + k)) * 60 + (m2 - m1));
 }
-
-
-
-
 
 /*
 Vernon is a working man. He needs to attend a conference, and so he has to leave his home at exactly , denoting the time in hours and minutes in a 24-hour clock. The moment he leaves, his home clock displays the correct time, .
