@@ -9,26 +9,25 @@ Output: "Mr%20J ohn%20Smith"
 */
 
 ///////////////////////////////////////////////////////////////
-//
+// TIME: N LINEAR (N- size of string)
+// SPACE: N LINEAR (cause we will create another array same size)
+// creating empty string and adding elements one by one to it
+// from initial string. If meet ' ' then adding '%20' instead
 std::string urlify(std::string s){
     
- std::string rt{ };
+    std::string rt{ };
  
- for (int i = 0; i < (int)s.size(); i++)
- {
+    for (int i = 0; i < s.size(); i++)
+    {
         if (s[i] != ' ')
         {
-                rt += s[i];
+            rt += s[i];
         }
         else
         {
             rt += "%20";
-        }
-     
-     
- }
- 
- 
- 
+        } 
+    }
     return rt;
 }
+///////////////////////////////////////////////////////////////
