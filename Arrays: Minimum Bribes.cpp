@@ -1,4 +1,10 @@
+void minimumBribes(vector<int> q) {
+// given a array, we need to figure out how many swaps we need to do
+// to sort it. 
+// each element can only move 2 times.
 
+  
+}
 
 /*
 It's New Year's Day and everyone's in line for the Wonderland rollercoaster ride!
