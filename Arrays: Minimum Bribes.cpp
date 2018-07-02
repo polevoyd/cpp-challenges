@@ -3,6 +3,32 @@ void minimumBribes(vector<int> q) {
 // to sort it. 
 // each element can only move 2 times.
 
+    int steps{};
+    
+    for (int i = q.size() - 1; i >= 0; i--) 
+    {
+        // going backwards through array
+        // if difference between element and its position
+        // more than 2 - it means we have to do more than 2 steps
+        // to move it to ideal position
+        if (q[i] - (i + 1) > 2) 
+        {
+            // therefore its too chaotic
+            std::cout << "Too chaotic" << endl;
+            return;
+        }
+        
+        // if difference between ideal position is less than 2
+        // count how many elements less than
+        for (int j = q[i] - 2; j < i; j++)
+        {
+            if (q[j] > q[i])
+            {
+                steps++;   
+            }
+        }   
+    }
+    std::cout << steps << endl;
   
 }
 
