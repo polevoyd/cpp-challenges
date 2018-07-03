@@ -1,3 +1,35 @@
+/////////////////////////////////////////////////////////////////////////////
+
+int minimumSwaps(vector<int> arr) {
+    
+    // TIME: N + N = N LINEAR 
+    // SPACE: N LINEAR (cause creating a map)
+    // IDEA: we looking for a positions of elements
+    // in a map we created from array
+    int count{};
+    // map <element, position>
+    std::map<int ,int> m{};
+    // filling a map
+    for(int i=0; i < arr.size(); i++)
+        m[arr[i]]=i;
+    // for each element we will check if sorted
+    for (int i=0; i < arr.size(); i++)
+    {   // and we not sorted
+        if(arr[i] != i+1)
+        {
+            // a - position of element ideal
+            // for that place
+            int a = m[i+1];
+            // swap elements in array and in map
+            std::swap(arr[i], arr[a]);
+            std::swap(m[arr[i]], m[arr[a]]);
+            // and increase count
+            count++;
+        }
+    }
+    return count;
+}
+/////////////////////////////////////////////////////////////////////////////
 
 int minimumSwaps(vector<int> arr) {
     // TIME: N*N SQUARED (N - size of array)
