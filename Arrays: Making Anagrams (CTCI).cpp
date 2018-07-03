@@ -1,5 +1,7 @@
 int makeAnagram(string a, string b) {
     
+    // TIME: A.SIZE + B.SIZE
+    // SPACE: 1 CONST
     auto count{};
     // full alphabet set frequency
     vector<int> frequency(26, 0);
