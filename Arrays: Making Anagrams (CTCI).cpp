@@ -1,10 +1,5 @@
 int makeAnagram(string a, string b) {
     
-    
-    
-    
-    
-    
     ////////////////////////////////////////////////////////////////////
     // BRUTE FORCE:
     // for each element in first array check equal element in second and
