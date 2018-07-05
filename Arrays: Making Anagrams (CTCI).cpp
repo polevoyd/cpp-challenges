@@ -1,30 +1,30 @@
 int makeAnagram(string a, string b) {
     
-    // TIME: A.SIZE + B.SIZE
+    // BRUTE FORCE:
+    // for each element in first array check equal element in second and
+    // cross it. At end count amount elements that not crossed
+    // TIME: N*M where (N,M - sizes)
     // SPACE: 1 CONST
-    auto count{};
-    // full alphabet set frequency
-    vector<int> frequency(26, 0);
+    int counter{};
     
-    // for first string
-    for (auto c : a) 
-    { 
-        freq[c - 'a']++; 
-    }
+    for (char &i : a)
+        for (char &k : b)
+            if (i == k)
+            {
+                i = '0';
+                k = '0';
+                break;
+            }
     
-    // for second string
-    for (auto c : b) 
-    { 
-        freq[c - 'a']++; 
-    }
+    for (auto i : a)
+        if (i != '0')
+            counter++;
     
-    // sum all difference values
-    for (auto val : freq) 
-    { 
-        count += abs(val); 
-    }
-    
-    return count;
+    for (auto i : b)
+        if (i != '0')
+            counter++;
+
+    return counter;
 }
 
 /*
