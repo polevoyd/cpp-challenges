@@ -10,11 +10,9 @@ Input:
 ]
 Output:  [1,2,4,7,5,3,6,8,9]
     */
+    vector<int> findDiagonalOrder(vector<vector<int>>& matrix) {
     // TIME: N LINEAR cause go through each element
     // SPACE: LINEAR - cause using array of same size
-    vector<int> findDiagonalOrder(vector<vector<int>>& matrix) {
-        
-        
     int msize = (int)matrix.size();
     
     std::vector<int> emp{};
