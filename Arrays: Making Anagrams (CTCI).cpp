@@ -1,5 +1,11 @@
 int makeAnagram(string a, string b) {
     
+    
+    
+    
+    
+    
+    ////////////////////////////////////////////////////////////////////
     // BRUTE FORCE:
     // for each element in first array check equal element in second and
     // cross it. At end count amount elements that not crossed
@@ -26,6 +32,7 @@ int makeAnagram(string a, string b) {
 
     return counter;
 }
+////////////////////////////////////////////////////////////////////
 
 /*
 Check out the resources on the page's right side to learn more about strings. The video tutorial is by Gayle Laakmann McDowell, author of the best-selling interview book Cracking the Coding Interview.
