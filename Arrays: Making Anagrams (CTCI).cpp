@@ -27,6 +27,14 @@ int makeAnagram(string a, string b) {
 
     return counter;
 }
+
+/*  // SAME CODE IN SHORT:
+    int counter{};
+    for (char &i : a){for (char &k : b){if (i == k){i = '0'; k = '0'; break;}}}      
+    for (auto i : a){if (i != '0'){counter++;}}
+    for (auto i : b){if (i != '0'){counter++;}}
+    return counter;
+*/
 ////////////////////////////////////////////////////////////////////
 
 /*
