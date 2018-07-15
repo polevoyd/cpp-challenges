@@ -23,7 +23,7 @@ void quickSort(std::vector<int> &input_array, int left, int right)
 		}
 	}
 
-	/* recursion */
+	/* recursive way */
 	/* if i didnt reach a end (right) or j didnt reach a 	beginning (left), 	then repeat function */
 	if (left < j)
 		quickSort(input_array, left, j);
